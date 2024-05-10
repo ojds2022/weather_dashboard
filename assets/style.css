@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+}
+
+header {
+    height: 5vh;
+    color: white;
+    background: linear-gradient(to right, #ff70f5, #424bf7);
+    padding: 10px 0;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    margin: 0 1em;
+    height: 90vh;
+    display: grid;
+    grid-template: 
+                "a b b"
+                "a c c"
+                "a c c"; 
+}
+
+#citySearchSection {
+    grid-area: a;
+    margin-right: 1em;
+}
+#currentDateSection {
+    width: 600px;
+    grid-area: b;
+    margin: 1em 0;
+    border: solid black 1px;
+    padding: 5px 10px;
+}
+#futureDatesSection {
+    grid-area: c;
+}
+
+#inputAndSearchBtn {
+    border-bottom: solid 1px black;
+    width: 250px;
+}
+
+#inputField {
+    width: 97%;
+    border-radius: 5px;
+    border: solid 1px;
+    padding: 5px;
+}
+
+#searchButton {
+    width: 100%;
+    margin: 1em 0;
+    padding: 5px;
+    background-color: lightskyblue;
+    border: solid 1px;
+    border-radius: 5px;
+}
+#searchButton:hover {
+    background-color: rgb(61, 181, 255);
+    cursor: pointer;
+}
+
+#listOfCitiesSearched {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    margin-top: 0.5em;
+}
+
+#listOfCitiesSearched button {
+    margin: 0.5em 0;
+    border-radius: 5px;
+    padding: 5px;
+    border: solid 1px;
+}
+#listOfCitiesSearched button:hover {
+    cursor: pointer;
+    background-color: darkgrey;
+}
+
+#currentLocation {
+    display: flex;
+    flex-grow: 1;
+}
+
+#currentLocation div {
+    margin-right: 5px;
+}
+
+#threeDayForecast {
+    display: flex;
+}
+
+#threeDayForecast div {
+    margin-right: 1em;
+    padding: 0 20px;
+    background-color: darkblue;
+    color: white;
+}
+
+footer {
+    height: 10vh;
+    margin-top: 1em;
+    background: linear-gradient(to right, #ff70f5, #424bf7);
+}
