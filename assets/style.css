@@ -23,18 +23,20 @@ main {
                 "a c c"; 
 }
 
-#citySearchSection {
+#citySearchSection { /* section that includes the search bar and the previously searched city buttons */
     grid-area: a;
     margin-right: 1em;
 }
-#currentDateSection {
+
+#currentDateSection { /* section that includes the currently searched city's weather data */
     width: 600px;
     grid-area: b;
     margin: 1em 0;
     border: solid black 1px;
     padding: 5px 10px;
 }
-#futureDatesSection {
+
+#futureDatesSection { /* section that includes the 3-day forecast */
     grid-area: c;
 }
 
@@ -58,12 +60,13 @@ main {
     border: solid 1px;
     border-radius: 5px;
 }
+
 #searchButton:hover {
     background-color: rgb(61, 181, 255);
     cursor: pointer;
 }
 
-#listOfCitiesSearched {
+#listOfCitiesSearched { /* container of list of buttons with previously searched cities */
     display: flex;
     flex-direction: column;
     width: 250px;
@@ -76,6 +79,7 @@ main {
     padding: 5px;
     border: solid 1px;
 }
+
 #listOfCitiesSearched button:hover {
     cursor: pointer;
     background-color: darkgrey;

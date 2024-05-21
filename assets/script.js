@@ -4,34 +4,6 @@ const searchButton = document.getElementById('searchButton');
 const genDate = new Date();
 const formattedDate = genDate.toLocaleDateString('en-US');
 
-const futureDate1 = () => {
-    const genDate = new Date();
-    genDate.setDate(genDate.getDate() + 1);
-    const month = (genDate.getMonth() + 1).toString().padStart(1); // Get month (adding 1 because month is zero-indexed)
-    const day = genDate.getDate().toString().padStart(2, '0'); // Get day
-    const year = genDate.getFullYear(); // Get year
-    const formattedDate = `${month}/${day}/${year}`;
-    return formattedDate;
-}
-const futureDate2 = () => {
-    const genDate = new Date();
-    genDate.setDate(genDate.getDate() + 2);
-    const month = (genDate.getMonth() + 1).toString().padStart(1); // Get month (adding 1 because month is zero-indexed)
-    const day = genDate.getDate().toString().padStart(2, '0'); // Get day
-    const year = genDate.getFullYear(); // Get year
-    const formattedDate = `${month}/${day}/${year}`;
-    return formattedDate;
-}
-const futureDate3 = () => {
-    const genDate = new Date();
-    genDate.setDate(genDate.getDate() + 3);
-    const month = (genDate.getMonth() + 1).toString().padStart(1); // Get month (adding 1 because month is zero-indexed)
-    const day = genDate.getDate().toString().padStart(2, '0'); // Get day
-    const year = genDate.getFullYear(); // Get year
-    const formattedDate = `${month}/${day}/${year}`;
-    return formattedDate;
-}
-
 const currentCity = document.getElementById('currentCity');
 const currentRegion = document.getElementById('currentRegion');
 const currentDate = document.getElementById('currentDate');
@@ -44,22 +16,49 @@ const day1 = document.getElementById('day1');
 const day2 = document.getElementById('day2');
 const day3 = document.getElementById('day3');
 
-const listOfCitiesSearched = document.getElementById('listOfCitiesSearched');
+const listOfCitiesSearched = document.getElementById('listOfCitiesSearched'); // buttons that appear below the search bar
 let arrayOfCities = JSON.parse(localStorage.getItem('arrayOfCities'));
+
+const futureDate1 = () => { // 1 day forecast
+    const genDate = new Date();
+    genDate.setDate(genDate.getDate() + 1);
+    const month = (genDate.getMonth() + 1).toString().padStart(1); // Get month (adding 1 because month is zero-indexed)
+    const day = genDate.getDate().toString().padStart(2, '0'); // Get day
+    const year = genDate.getFullYear(); // Get year
+    const formattedDate = `${month}/${day}/${year}`;
+    return formattedDate;
+}
+const futureDate2 = () => { // 2 day forecast
+    const genDate = new Date();
+    genDate.setDate(genDate.getDate() + 2);
+    const month = (genDate.getMonth() + 1).toString().padStart(1); // Get month (adding 1 because month is zero-indexed)
+    const day = genDate.getDate().toString().padStart(2, '0'); // Get day
+    const year = genDate.getFullYear(); // Get year
+    const formattedDate = `${month}/${day}/${year}`;
+    return formattedDate;
+}
+const futureDate3 = () => { // 3 day forecast
+    const genDate = new Date();
+    genDate.setDate(genDate.getDate() + 3);
+    const month = (genDate.getMonth() + 1).toString().padStart(1); // Get month (adding 1 because month is zero-indexed)
+    const day = genDate.getDate().toString().padStart(2, '0'); // Get day
+    const year = genDate.getFullYear(); // Get year
+    const formattedDate = `${month}/${day}/${year}`;
+    return formattedDate;
+}
 
 searchButton.addEventListener('click', () => {
     fetchWeatherInfo();
 });
 
-function fetchWeatherInfo(previousCitySearched) {
+function fetchWeatherInfo(previousCitySearched) { // fetches weather info from api
     const city = userInput.value;
     const cachedData = localStorage.getItem(city);
 
-    if (cachedData) {
-        // If data is found in cache, parse and use it directly
+    if (cachedData) { // If data is found in cache, parse and use it directly
         const data = JSON.parse(cachedData);
         postWeatherInfo(data);
-    } else if (previousCitySearched) {
+    } else if (previousCitySearched) { // if a city has been previously searched, 
         const url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${previousCitySearched}&days=6`;
         const options = {
             method: 'GET',
@@ -76,8 +75,7 @@ function fetchWeatherInfo(previousCitySearched) {
                     postWeatherInfo(response)
                 })
                 .catch(err => console.error(err));
-    } else {
-        // If data is not found in cache, fetch it from the API
+    } else { // If data is not found in cache, fetch it from the API
         const url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city}&days=6`;
         const options = {
             method: 'GET',
@@ -97,7 +95,7 @@ function fetchWeatherInfo(previousCitySearched) {
         }
 }
 
-function postCitiesSearched(data) {
+function postCitiesSearched(data) { // creates the buttons of cities previously searched
     if (!arrayOfCities) {
         arrayOfCities = [];
     }
@@ -134,7 +132,7 @@ function postCitiesSearched(data) {
     }
 }
 
-function postWeatherInfo(data) {
+function postWeatherInfo(data) { // posts the weather info that is fetched from the fetchWeatherInfo function
     currentCity.innerHTML = `<h2>${data.location.name},</h2>`;
     currentRegion.innerHTML = `<h2>${data.location.region}</h2>`;
     currentDate.innerHTML = `<h2>(${formattedDate})</h2>`;
@@ -162,8 +160,7 @@ function postWeatherInfo(data) {
                       <p>Humidity: ${data.forecast.forecastday[2].day.avghumidity}%</p>`;
 }
 
-// Function to populate weather information on page load
-window.addEventListener('load', () => {
+window.addEventListener('load', () => { // when page is initially loaded, populates the fetchWeatherInfo function with the data of the last city that was searched by the user
     const lastSearchedCity = arrayOfCities[arrayOfCities.length - 1];
     fetchWeatherInfo(lastSearchedCity);
 });
